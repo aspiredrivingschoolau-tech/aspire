@@ -2,14 +2,12 @@
 
 import { useEffect } from "react";
 
-const ASPIRE_BOOKING_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbzYVmCTk0jBE4ItdW9WtgfqyyZN4rxrcNzJBnf0KMr3966kD0MTFu-EI2ejwIcex2jg/exec";
-
 export default function Home() {
   // const year = new Date().getFullYear();
   const year = "2026";
   useEffect(() => {
     const brandCursor = document.querySelector(".brand-cursor");
+    let cleanupCursor = () => {};
 
     if (brandCursor && window.matchMedia("(pointer: fine)").matches) {
       const pointerMove = (event) => {
@@ -28,7 +26,7 @@ export default function Home() {
       document.addEventListener("pointerdown", pressCursor);
       document.addEventListener("pointerup", releaseCursor);
 
-      return () => {
+      cleanupCursor = () => {
         document.removeEventListener("pointermove", pointerMove);
         document.removeEventListener("pointerleave", hideCursor);
         document.removeEventListener("pointerenter", showCursor);
@@ -69,7 +67,7 @@ export default function Home() {
     }
 
     const form = document.getElementById("aspire-booking-form");
-    if (!form) return;
+    if (!form) return cleanupCursor;
 
     const contactSelect = form.querySelector('[name="contactPreference"]');
     const emailInput = form.querySelector('[name="customerEmail"]');
@@ -117,20 +115,12 @@ export default function Home() {
         lesson: (data.get("lesson") || "").toString(),
         day: (data.get("day") || "").toString(),
         time: (data.get("time") || "").toString(),
+        pickupAddress: (data.get("pickupAddress") || "").toString(),
         notes: (data.get("notes") || "").toString(),
         contactPreference: (data.get("contactPreference") || "").toString(),
         submittedAt: new Date().toISOString(),
         source: "Aspire Driving School website",
       };
-
-      if (ASPIRE_BOOKING_ENDPOINT === "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE") {
-        status.textContent =
-          "The form is ready, but it is not connected to Gaurav yet. The website owner must finish the one-time Google Apps Script setup before requests can be delivered. No message has been sent.";
-        status.style.background = "#fff4d6";
-        status.style.color = "#704d00";
-        status.style.display = "block";
-        return;
-      }
 
       button.disabled = true;
       const originalText = button.textContent;
@@ -138,21 +128,26 @@ export default function Home() {
       status.style.display = "none";
 
       try {
-        await fetch(ASPIRE_BOOKING_ENDPOINT, {
+        const response = await fetch("/api/booking-request", {
           method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(booking),
         });
 
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || "Sorry, we couldn't send your request. Please try again.");
+        }
+
         form.reset();
         status.textContent =
+          result.message ||
           "Thanks! Your request has been sent from this page. Gaurav will follow up using your chosen contact method. This is a request, not a confirmed lesson.";
         status.style.background = "#e8f7ee";
         status.style.color = "#14532d";
         status.style.display = "block";
       } catch (error) {
-        status.textContent =
+        status.textContent = error.message ||
           "Sorry, we couldn't send your request. Please try again in a moment or contact Aspire Driving School directly.";
         status.style.background = "#fff4d6";
         status.style.color = "#704d00";
@@ -166,6 +161,7 @@ export default function Home() {
     form.addEventListener("submit", handleSubmit);
 
     return () => {
+      cleanupCursor();
       form.removeEventListener("submit", handleSubmit);
       if (contactSelect) {
         contactSelect.removeEventListener("change", updateContactFields);
@@ -573,7 +569,7 @@ export default function Home() {
               </div>
             </div>
 
-            <form className="booking-form" id="aspire-booking-form">
+            <form className="booking-form" id="aspire-booking-form" method="post">
               <h3>Request a lesson</h3>
               <p>
                 Tell us what you need and your preferred contact method. We’ll follow up to confirm availability. A request is
@@ -617,6 +613,10 @@ export default function Home() {
                 <label className="full">
                   Preferred time
                   <input name="time" placeholder="e.g. Morning or after 3 pm" type="text" />
+                </label>
+                <label className="full">
+                  Pickup Address
+                  <textarea name="pickupAddress" placeholder="Enter your pickup address" />
                 </label>
                 <label className="full">
                   Anything else?

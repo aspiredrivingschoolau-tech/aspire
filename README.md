@@ -20,6 +20,10 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Booking request emails
+
+The booking form sends an HTML request notification to the school through `/api/booking-request` using Gmail SMTP. If the learner provides an email address, it also sends them an HTML confirmation. Copy `.env.example` to `.env.local`, then set `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and `BOOKING_RECIPIENT_EMAIL`. Use a Google App Password for `GMAIL_APP_PASSWORD`; keep it out of source control. Configure the same variables in your hosting provider for deployed email delivery.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
