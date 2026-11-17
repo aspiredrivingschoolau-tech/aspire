@@ -22,7 +22,15 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Booking request emails
 
-The booking form sends an HTML request notification to the school through `/api/booking-request` using Gmail SMTP. If the learner provides an email address, it also sends them an HTML confirmation. Copy `.env.example` to `.env.local`, then set `GMAIL_USER`, `GMAIL_APP_PASSWORD`, and `BOOKING_RECIPIENT_EMAIL`. Use a Google App Password for `GMAIL_APP_PASSWORD`; keep it out of source control. Configure the same variables in your hosting provider for deployed email delivery.
+The booking form sends an HTML request notification to the school through `/api/booking-request` using Gmail SMTP. If the learner provides an email address, it also sends them an HTML confirmation.
+
+For local development, copy `.env.example` to `.env.local` and replace the example values:
+
+- `GMAIL_USER`: the Gmail account used to send messages.
+- `GMAIL_APP_PASSWORD`: an App Password generated for that account (requires 2-Step Verification; do not use the normal Gmail password).
+- `BOOKING_RECIPIENT_EMAIL`: the inbox that should receive booking requests.
+
+For deployed email delivery, add these same three variables to the hosting provider's server-side environment-variable settings, then redeploy the app. A local `.env.local` file is not deployed with the app. Keep real credentials out of source control and do not share them in chat.
 
 ## Learn More
 
