@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Aspire Driving School",
-  description: "Driving lessons and support for learners across Canberra.",
+  title: "Aspire Driving School Canberra | Professional Driving Lessons",
+  description: "Learn to drive with Aspire Driving School in Canberra. Professional driving lessons, expert guidance and personalised support to help learner drivers become confident and safe drivers.",
 };
 
 export default function RootLayout({ children }) {

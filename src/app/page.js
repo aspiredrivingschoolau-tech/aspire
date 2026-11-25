@@ -7,7 +7,7 @@ export default function Home() {
   const year = "2026";
   useEffect(() => {
     const brandCursor = document.querySelector(".brand-cursor");
-    let cleanupCursor = () => {};
+    let cleanupCursor = () => { };
 
     if (brandCursor && window.matchMedia("(pointer: fine)").matches) {
       const pointerMove = (event) => {
@@ -172,14 +172,14 @@ export default function Home() {
   return (
     <>
       <div className="brand-cursor" aria-hidden="true">
-        <img src="/aspire.jpg" alt="" />
+        <img src="/aspire.jpg" alt="Driving School Canberra" />
       </div>
 
       <header>
         <div className="wrap">
           <nav aria-label="Main navigation">
             <a className="brand" href="#home">
-              <img alt="Aspire Driving School logo" src="/aspire.jpg" />
+              <img alt="Aspire Driving School" src="/aspire.jpg" />
               <span>
                 ASPIRE
                 <small>DRIVING SCHOOL · CANBERRA</small>
@@ -272,7 +272,7 @@ export default function Home() {
               </div>
               <div className="package-grid">
                 <article className="package-card">
-                  <img className="package-image" src="/aspire1.jpg" alt="Learner driver practising with an instructor" loading="lazy" decoding="async" />
+                  <img className="package-image" src="/aspire1.jpg" alt="Driving Lessons Canberra" loading="lazy" decoding="async" />
                   <h4>Starter Package</h4>
                   <p className="package-lessons">3 lessons</p>
                   <strong className="package-price">$255</strong>
@@ -281,7 +281,7 @@ export default function Home() {
                 </article>
                 <article className="package-card package-featured">
                   <span className="package-badge">Most popular</span>
-                  <img className="package-image" src="/aspire2.jpg" alt="Learner driver building confidence behind the wheel" loading="lazy" decoding="async" />
+                  <img className="package-image" src="/aspire2.jpg" alt="Learner Driver Lessons Canberra" loading="lazy" decoding="async" />
                   <h4>Confidence Builder</h4>
                   <p className="package-lessons">5 lessons</p>
                   <strong className="package-price">$425</strong>
@@ -290,7 +290,7 @@ export default function Home() {
                 </article>
                 <article className="package-card package-best-value">
                   <span className="package-badge">Best value</span>
-                  <img className="package-image" src="/aspire3.jpg" alt="Car on the road during a driving lesson" loading="lazy" decoding="async" />
+                  <img className="package-image" src="/aspire3.jpg" alt="Professional Driving Instructor Canberra" loading="lazy" decoding="async" />
                   <h4>Road Ready</h4>
                   <p className="package-lessons">10 lessons</p>
                   <strong className="package-price">$820</strong>
@@ -298,7 +298,7 @@ export default function Home() {
                   <p className="package-description">Be fully prepared for the road.</p>
                 </article>
                 <article className="package-card">
-                  <img className="package-image" src="/aspire4.jpg" alt="Car used for a complete driving course" loading="lazy" decoding="async" />
+                  <img className="package-image" src="/aspire4.jpg" alt="Beginner Driving Lessons Canberra" loading="lazy" decoding="async" />
                   <h4>Complete Driving</h4>
                   <p className="package-lessons">15 lessons</p>
                   <strong className="package-price">$1,200</strong>
@@ -317,7 +317,7 @@ export default function Home() {
               </div>
               <div className="specialist-grid">
                 <article className="specialist-card">
-                  <img src="/aspire1.jpg" alt="Learner practising logbook driving skills" loading="lazy" decoding="async" />
+                  <img src="/aspire1.jpg" alt="Canberra Driving Test Preparation" loading="lazy" decoding="async" />
                   <div>
                     <h4>ACT Logbook Training</h4>
                     <p>10 lessons · CBT&amp;A training</p>
@@ -325,7 +325,7 @@ export default function Home() {
                   <strong>$820</strong>
                 </article>
                 <article className="specialist-card">
-                  <img src="/aspire2.jpg" alt="Driver practising for an overseas licence conversion" loading="lazy" decoding="async" />
+                  <img src="/aspire2.jpg" alt="Driving School Canberra" loading="lazy" decoding="async" />
                   <div>
                     <h4>Overseas Licence Conversion</h4>
                     <p>3 lessons</p>
@@ -333,7 +333,7 @@ export default function Home() {
                   <strong>$270</strong>
                 </article>
                 <article className="specialist-card">
-                  <img src="/aspire3.jpg" alt="Learner preparing for a practical driving test" loading="lazy" decoding="async" />
+                  <img src="/aspire3.jpg" alt="Driving Lessons Canberra" loading="lazy" decoding="async" />
                   <div>
                     <h4>Test Preparation</h4>
                     <p>2 lessons</p>
@@ -341,7 +341,7 @@ export default function Home() {
                   <strong>$175</strong>
                 </article>
                 <article className="specialist-card">
-                  <img src="/aspire4.jpg" alt="Car used for final practical test preparation" loading="lazy" decoding="async" />
+                  <img src="/aspire4.jpg" alt="Learner Driver Lessons Canberra" loading="lazy" decoding="async" />
                   <div>
                     <h4>Final Test Preparation</h4>
                     <p>3 lessons</p>
